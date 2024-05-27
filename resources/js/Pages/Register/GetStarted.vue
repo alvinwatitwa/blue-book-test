@@ -1,6 +1,6 @@
 <script setup>
+import Layout from '../../layouts/Layout.vue';
 
-import Layout from './layouts/Layout';
 
 </script>
 <template>
@@ -30,8 +30,7 @@ import Layout from './layouts/Layout';
         </section>
         </main>
     </div>
-    </Layout>
-
+</Layout>
   </template>
 
 
