@@ -1,32 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Todo;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Todo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
-class RegisterController extends Controller
+class TodoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function getStarted()
+    public function index()
     {
-
-     return Inertia::render('Register/GetStarted');
-
-    }
-
-    public function registerWithEmail()
-    {
-
-     return Inertia::render('Register/RegisterEmail');
-
+        //
     }
 
     /**
@@ -42,23 +30,12 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
+        //
+        $todo = Todo::create($request->all());
 
-        Log::info($request->all());
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed'],
-        ]);
+        $todos = Todo::all();
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        Auth::login($user);
-
-        return redirect('/dashboard');
+        return Inertia::render('Dashboard/Index', [$todos]);
     }
 
     /**

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Todo\TodoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,4 +11,9 @@ Route::get('/', function () {
 });
 
 
-Route::get('get-started', [RegisterController::class, 'index'])->name('get-started');
+Route::get('get-started', [RegisterController::class, 'getStarted'])->name('get.started');
+Route::get('register-with-email', [RegisterController::class, 'registerWithEmail'])->name('register.email');
+Route::post('register', [RegisterController::class, 'store'])->name('user.register');
+Route::get('login', [LoginController::class, 'index'])->name('index');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::apiResource('todos', TodoController::class);
