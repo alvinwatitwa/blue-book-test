@@ -33,9 +33,7 @@ class TodoController extends Controller
         //
         $todo = Todo::create($request->all());
 
-        $todos = Todo::all();
-
-        return Inertia::render('Dashboard/Index', [$todos]);
+        return redirect('/dashboard');
     }
 
     /**

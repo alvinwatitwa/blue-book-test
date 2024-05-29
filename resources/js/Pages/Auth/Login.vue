@@ -1,5 +1,37 @@
 <script setup>
     import Layout from '../../layouts/Layout.vue';
+    import { provide,ref } from "vue";
+    import {useForm} from "@inertiajs/inertia-vue3";
+    import Swal from 'sweetalert2'
+
+    defineProps({ errors: Object });
+
+    const user = ref({
+        email: '',
+        password: '',
+    });
+
+    function login() {;
+        const form = useForm({
+            email: user.value.email,
+            password: user.value.password,
+        });
+
+        form.post(route('auth.login'), {
+            onSuccess: () => {
+                Swal.fire({
+                        position: "top-end",
+                        title: 'Login Successfull',
+                        text: 'You have successfully logged in',
+                        icon: 'success'
+                    }).then(() => {
+                        // location.reload();
+                    });
+            }
+        });
+    }
+
+
     const navigateToDashboard = async() => {
         window.location.href = '/dashboard';
     }
@@ -59,5 +91,5 @@
         </main>
     </Layout>
 
-    
+
   </template>

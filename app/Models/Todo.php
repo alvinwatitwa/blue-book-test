@@ -18,4 +18,12 @@ class Todo extends Model
         'priority_id',
         'user_id'
     ];
+
+    public function status(){
+        return $this->belongsTo(Status::class);
+    }
+
+    public function priority(){
+        return $this->belongsTo(Priority::class);
+    }
 }

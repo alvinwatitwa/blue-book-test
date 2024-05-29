@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 
@@ -26,12 +29,19 @@ class LoginController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
+  /**
+     * Handle an incoming authentication request.
      */
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
         //
+        $request->authenticate();
+        $request->session()->regenerate();
+
+        return Inertia::render('Dashboard/Index', [
+            'todos' => Todo::where('user_id', Auth::user()->id)->get()
+        ]);
+
     }
 
     /**
@@ -58,11 +68,16 @@ class LoginController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
+  /**
+     * Destroy an authenticated session.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
     }
 }

@@ -2,6 +2,7 @@
   import { RichTextEditorComponent as EjsRichtexteditor,Toolbar,Link,Image,HtmlEditor } from "@syncfusion/ej2-vue-richtexteditor";
   import { provide,ref } from "vue";
   import {useForm} from "@inertiajs/inertia-vue3";
+  import Swal from 'sweetalert2';
 
 const rteInstance = ref(null);
 const value = ref("<p>The Rich text.</p>");
@@ -28,10 +29,10 @@ provide('richtexteditor', richtexteditor);
     function createTodo() {
 
     const form = useForm({
-        title: todo.title,
-        description: todo.description,
-        status_id: todo.status_id,
-        priority_id: todo.priority_id,
+        title: todo.value.title,
+        description: todo.value.description,
+        status_id: todo.value.status_id,
+        priority_id: todo.value.priority_id,
         user_id: 1
     });
 
@@ -42,8 +43,6 @@ provide('richtexteditor', richtexteditor);
                     title: 'Todo Created',
                     text: 'Todo successfully created',
                     icon: 'success'
-                }).then(() => {
-                    location.reload();
                 });
         }
     });
@@ -60,39 +59,40 @@ provide('richtexteditor', richtexteditor);
       </div>
       <div class="pb-4">
         <form class="flex flex-col w-full p-4">
-      <section class="flex gap-3 text-sm leading-5 text-center text-gray-900">
+      <section class="flex gap-3 text-sm leading-5 text-gray-900">
         <div class="flex flex-col flex-1">
-          <label for="status" class="sr-only">Status</label>
+          <label for="status" class="text-left sr-only">Status</label>
           <div>Status</div>
           <div class="flex justify-between gap-2 px-4 py-3 mt-1 bg-white border border-gray-300 border-solid rounded-md">
             <select id="status" class="w-full bg-transparent focus:outline-none" v-model="todo.status_id">
               <option value="" disabled selected>Select status</option>
-              <option value="1">Open</option>
-              <option value="2">In Progress</option>
-              <option value="3">Completed</option>
+              <option value="9c26bd26-61dd-457a-9b00-8e737aebce70">Open</option>
+              <option value="9c26bd26-6629-4f44-b4fe-cce56ce74e86">In Progress</option>
+              <option value="9c26bd26-61dd-457a-9b00-8e737aebce70">Completed</option>
             </select>
           </div>
         </div>
         <div class="flex flex-col flex-1">
-          <label for="priority" class="sr-only">Priority</label>
+          <label for="priority" class="text-left sr-only">Priority</label>
           <div>Priority</div>
           <div class="flex justify-between gap-2 px-4 py-3 mt-1 bg-white border border-gray-300 border-solid rounded-md">
             <select id="priority" class="w-full bg-transparent focus:outline-none" v-model="todo.priority_id">
               <option value="" disabled selected>Select priority</option>
-              <option value="1">High</option>
-              <option value="2">Medium</option>
-              <option value="3">Low</option>
+              <option value="9c26bd26-67da-44c2-94c2-04e4236aee47">Highest</option>
+              <option value="9c26bd26-6829-4835-95a6-d76a0efde9e5">High</option>
+              <option value="9c26bd26-6869-4263-9d44-3fb883625005">Medium</option>
+              <option value="9c26bd26-68a6-4956-9de7-97b2495200bc">Low</option>
             </select>
           </div>
         </div>
       </section>
-      <section class="mt-3 text-sm leading-5 text-center text-gray-900">
-        <label for="title" class="sr-only">Todo Title</label>
+      <section class="mt-3 text-sm leading-5 text-gray-900">
+        <label for="title" class="text-left sr-only">Todo Title</label>
         <div>Todo Title</div>
         <input id="title" type="text"  v-model="todo.title" class="w-full mt-1 bg-white border border-gray-300 border-solid rounded-md shrink-0 h-11" />
       </section>
-      <section class="mt-3 text-sm leading-5 text-center text-gray-900">
-        <label for="description" class="sr-only">Todo Description</label>
+      <section class="mt-3 text-sm leading-5 text-gray-900">
+        <label for="description" class="text-left sr-only">Todo Description</label>
         <div>Todo Description</div>
         <div class="default-section">
                 <ejs-richtexteditor v-model="todo.description" id="default" ref="rteInstance" v-bind:value="value"></ejs-richtexteditor>

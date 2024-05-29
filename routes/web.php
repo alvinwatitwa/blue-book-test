@@ -14,6 +14,7 @@ Route::get('/', function () {
 Route::get('get-started', [RegisterController::class, 'getStarted'])->name('get.started');
 Route::get('register-with-email', [RegisterController::class, 'registerWithEmail'])->name('register.email');
 Route::post('register', [RegisterController::class, 'store'])->name('user.register');
-Route::get('login', [LoginController::class, 'index'])->name('index');
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('authenticate', [LoginController::class, 'store'])->name('auth.login');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::apiResource('todos', TodoController::class);

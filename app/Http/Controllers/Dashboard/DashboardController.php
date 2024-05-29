@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -14,7 +16,9 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Dashboard/Index');
+        return Inertia::render('Dashboard/Index', [
+                'todos' => Todo::with('status', 'priority')->get()
+        ]);
     }
 
     /**

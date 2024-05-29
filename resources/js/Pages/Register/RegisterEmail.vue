@@ -2,7 +2,9 @@
     import Layout from '../../layouts/Layout.vue';
     import { provide,ref } from "vue";
     import {useForm} from "@inertiajs/inertia-vue3";
+    import Swal from 'sweetalert2'
 
+    defineProps({ errors: Object });
 
     const user = ref({
         name: '',
@@ -12,17 +14,18 @@
     });
 
     function register() {
+        console.log(user);
         const form = useForm({
-            name: user.name,
-            email: user.email,
-            password: user.password,
-            confirm_password: user.confirm_password
+            name: user.value.name,
+            email: user.value.email,
+            password: user.value.password,
+            password_confirmation: user.value.confirm_password
         });
 
         form.post(route('user.register'), {
             onSuccess: () => {
-                console.log('user registered');
                 Swal.fire({
+                        position: "top-end",
                         title: 'Registration Successfull',
                         text: 'You have successfully registered',
                         icon: 'success'
@@ -46,17 +49,21 @@
                 <div class="flex-1 my-auto text-2xl font-semibold leading-8 text-gray-900">Register using your email</div>
                 </div>
                 <form class="mt-4">
-                <label for="name" class="block mt-4 text-lg leading-6 text-center text-gray-900 max-md:max-w-full">Name</label>
+                <label for="name" class="block mt-4 text-lg leading-6 text-left text-gray-900 max-md:max-w-full">Name</label>
                 <input type="text" id="name" v-model="user.name" name="name" class="shrink-0 mt-1 bg-white rounded-lg border border-gray-300 border-solid h-[57px] w-full" />
+                <div class="error" v-if="errors.name">{{ errors.name }}</div>
 
-                <label for="email" class="block mt-4 text-lg leading-6 text-center text-gray-900 max-md:max-w-full">Email</label>
+                <label for="email" class="block mt-4 text-lg leading-6 text-left text-gray-900 max-md:max-w-full">Email</label>
                 <input type="email" id="email" v-model="user.email" name="email" class="shrink-0 mt-1 bg-white rounded-lg border border-gray-300 border-solid h-[57px] w-full" />
+                <div class="error" v-if="errors.email">{{ errors.email }}</div>
 
-                <label for="password" class="block mt-4 text-lg leading-6 text-center text-gray-900 max-md:max-w-full">Password</label>
+                <label for="password" class="block mt-4 text-lg leading-6 text-left text-gray-900 max-md:max-w-full">Password</label>
                 <input type="password" id="password" v-model="user.password" name="password" class="shrink-0 mt-1 bg-white rounded-lg border border-gray-300 border-solid h-[57px] w-full" />
+                <div class="error" v-if="errors.password">{{ errors.password }}</div>
 
-                <label for="confirm_password" class="block mt-4 text-lg leading-6 text-center text-gray-900 max-md:max-w-full">Confirm Password</label>
+                <label for="confirm_password" class="block mt-4 text-lg leading-6 text-left text-gray-900 max-md:max-w-full">Confirm Password</label>
                 <input type="password" id="confirm_password" v-model="user.confirm_password" name="confirm_password" class="shrink-0 mt-1 bg-white rounded-lg border border-gray-300 border-solid h-[57px] w-full" />
+                <div class="error" v-if="errors.confirm_password">{{ errors.confirm_password }}</div>
 
                 <button @click.prevent="register()" class="items-center justify-center w-full px-6 py-4 mt-4 text-lg font-medium leading-6 text-center text-white bg-blue-600 rounded-lg max-md:px-5 max-md:max-w-full">Create Account</button>
                 </form>

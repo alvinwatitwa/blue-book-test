@@ -11,3 +11,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.error{
+    color: red;
+    font-size: 11px;
+}

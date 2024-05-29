@@ -1,9 +1,14 @@
 <script setup>
     import LayoutAuthenticated from '../../layouts/LayoutAuthenticated.vue';
     import UserInfo from '../../components/Dashboard/UserInfo.vue';
+    import AccordionPanel from '../../components/Dashboard/AccordionPanel.vue';
     import ToDo from '../../components/Dashboard/ToDo/ToDo.vue';
     import AddToDo from '../../components/Dashboard/ToDo/AddToDo.vue';
     import { ref } from 'vue'
+
+    const props = defineProps({
+        todos: Object,
+    })
 
     const isModalVisible = ref(false);
 
@@ -59,6 +64,13 @@
           <h4>Complete</h4>
           <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9f4f96c4ec92f0d6557b9b36d49a17b2b3cec57272b33d9c80184e983c3adaf5?apiKey=36440029668448b78377e0e215175ca3&" alt="Expand complete items" class="w-5 my-auto shrink-0 aspect-square" />
         </div>
+
+        <AccordionPanel
+            aria-title="incidents"
+            title="Pending"
+            :todos="todos">
+        </AccordionPanel>
+
       </section>
     </section>
   </main>
