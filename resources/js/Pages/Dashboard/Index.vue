@@ -7,18 +7,18 @@
     import { ref } from 'vue'
 
     const props = defineProps({
-        todos: Object,
-    })
+        todos: Array,
+        statuses: Array,
+        priorities: Array
+    });
 
     const isModalVisible = ref(false);
 
     function openModal() {
-        console.log('open');
       isModalVisible.value = true;
     }
 
     function closeModal() {
-        console.log('close');
       isModalVisible.value = false;
     }
 </script>
