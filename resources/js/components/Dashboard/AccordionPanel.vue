@@ -7,7 +7,6 @@
     ariaTitle: { type: String, required: true },
     todos: { type: Array, required: true },
   });
-  console.log('todos', props.todos)
   const showPanel = ref(false);
   const togglePanel = (event) => {
     showPanel.value = !showPanel.value;

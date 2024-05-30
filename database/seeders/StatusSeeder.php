@@ -17,19 +17,21 @@ class StatusSeeder extends Seeder
         //
        $statuses = [
             [
+                'id' => '9c26bd26-61dd-457a-9b00-8e737aebce70',
                 'code' => 'PEN',
                 'name' => 'Pending',
             ],
             [
+                'id' => '9c26bd26-6629-4f44-b4fe-cce56ce74e86',
                 'code' => 'BCKLG',
                 'name' => 'Backlog',
             ],
             [
+                'id' => '9c26bd26-61dd-457a-9b00-8e737aftgy70',
                 'code' => 'COMP',
                 'name' => 'Complete',
             ]
         ];
-
 
         foreach($statuses  as $status) {
             Status::create($status);

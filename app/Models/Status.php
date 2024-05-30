@@ -12,6 +12,7 @@ class Status extends Model
     use HasUuids;
 
     protected $fillable = [
+        'id',
         'code',
         'name'
     ];
