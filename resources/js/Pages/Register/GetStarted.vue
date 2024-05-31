@@ -9,8 +9,8 @@
         window.location.href = '/register-with-email';
     }
 
-    const clientId = ref('590809705232-6otk7ig5sidljkda5ofll6bcl2ng2dhj.apps.googleusercontent.com');
-    const clientSecret = ref('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');
+    const clientId = ref(import.meta.env.VITE_APP_CLIENT_ID)
+    const clientSecret = ref(import.meta.env.VITE_APP_CLIENT_SECRET)
     const userData = ref({})
 
   const fetchUserDataFrom = async (code) => {
