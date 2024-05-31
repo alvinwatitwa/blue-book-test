@@ -86,7 +86,7 @@
                 </button>
 
                 <div class="mt-4 text-sm font-medium leading-5 text-center max-md:max-w-full">
-                    Don’t have an account? <a href="/register-with-email" class="text-blue-600"> Register</a>
+                    Don’t have an account? <a href="/get-started" class="text-blue-600"> Register</a>
                 </div>
                 </form>
             </section>

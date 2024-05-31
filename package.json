@@ -27,6 +27,7 @@
         "dompurify": "^3.1.4",
         "isomorphic-dompurify": "^2.11.0",
         "sweetalert2": "^11.11.0",
-        "vue-sweetalert2": "^5.0.10"
+        "vue-sweetalert2": "^5.0.10",
+        "vue3-google-login": "^2.0.26"
     }
 }
