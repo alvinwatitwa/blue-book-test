@@ -12,9 +12,12 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function search(Request $request)
     {
         //
+        $todos = Todo::where('title', 'LIKE', '%'.$request->search .'%')
+        ->orWhere('description', 'LIKE', '%'.$request->search .'%')
+        ->get();
     }
 
     /**

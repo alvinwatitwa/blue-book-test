@@ -26,7 +26,7 @@
                     <div class="brand-name">TaskManager</div>
                 </div>
                 <nav class="nav-buttons">
-                    <div class="nav-login" tabindex="0" role="button">Login</div>
+                    <a class="nav-login" tabindex="0" role="button" href="{{url('login')}}">Login</a>
                     <a class="nav-start" tabindex="0" role="button" href="{{url('get-started')}}">Get Started</a>
                 </nav>
             </div>

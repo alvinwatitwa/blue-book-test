@@ -58,6 +58,7 @@
                 <input
                     type="email"
                     id="emailInput"
+                    v-model="user.email"
                     class="shrink-0 w-full mt-1 bg-white rounded-lg border border-gray-300 border-solid h-[57px] max-md:max-w-full"
                 />
 
@@ -68,6 +69,7 @@
                 <input
                     type="password"
                     id="passwordInput"
+                    v-model="user.password"
                     class="shrink-0 w-full mt-1 bg-white rounded-lg border border-gray-300 border-solid h-[57px] max-md:max-w-full"
                 />
 
@@ -77,7 +79,7 @@
 
                 <button
                     type="submit"
-                    @click.prevent="navigateToDashboard()"
+                    @click.prevent="login()"
                     class="items-center justify-center w-full px-6 py-4 mt-4 text-lg font-medium leading-6 text-center text-white bg-blue-600 rounded-lg whitespace-nowrap max-md:px-5 max-md:max-w-full"
                 >
                     Login

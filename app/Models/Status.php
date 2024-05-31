@@ -16,4 +16,9 @@ class Status extends Model
         'code',
         'name'
     ];
+
+    public function todos()
+    {
+        return $this->hasMany(Todo::class, 'status_id');
+    }
 }

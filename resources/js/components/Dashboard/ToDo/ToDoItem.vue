@@ -1,16 +1,23 @@
 <script setup>
  import { ref , computed} from 'vue';
  import DOMPurify from 'isomorphic-dompurify';
- import TodoItemStatus from './../../TodoItemStatus.vue'
- import ToDoItemPriority from '../ToDoItemPriority.vue';
+ import TodoItemStatus from '../../TodoItemStatus.vue';
+ import ToDoItemPriority from './ToDoItemPriority.vue'
+ import { format } from 'date-fns';
+
 
  const props = defineProps({
     todo: { type: Array, required: true },
   });
 
   const sanitizedTodoContent = computed(() => {
-  return DOMPurify.sanitize(props.todo.description);
-})
+        return DOMPurify.sanitize(props.todo.description);
+    })
+
+  function formatDate(dateString) {
+        const date = new Date(dateString);
+        return format(date, "MMM do yyyy");
+    }
 </script>
 
 <template>
@@ -18,11 +25,10 @@
       <header class="flex justify-between gap-2 max-md:flex-wrap max-md:max-w-full">
         <section>
           <h2 class="text-base text-gray-900">{{ todo.title }}</h2>
-          <time class="mt-1 text-xs text-gray-500" datetime="2024-03-25">Mar 25th 2024</time>
+          <time class="mt-1 text-xs text-gray-500" datetime="2024-03-25">{{ formatDate(todo.created_at) }}</time>
         </section>
       </header>
-
-        <div class="mt-2 text-sm text-gray-500 max-md:max-w-full" v-html="sanitizedTodoContent"></div>
+      <div class="mt-2 text-sm text-gray-500 max-md:max-w-full" v-html="sanitizedTodoContent"></div>
       <footer class="flex self-start gap-3 mt-2 text-xs text-gray-900 whitespace-nowrap">
         <div class="flex gap-1 px-1.5 py-1 bg-gray-50 rounded-[99px]">
             <TodoItemStatus :status="todo.status"/>

@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 
@@ -34,15 +36,27 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        //
-        $request->authenticate();
-        $request->session()->regenerate();
+        $this->authenticate($request);
 
-        return Inertia::render('Dashboard/Index', [
-            'todos' => Todo::where('user_id', Auth::user()->id)->get()
-        ]);
+        return redirect()->route('dashboard.index');
 
     }
+
+    public function authenticate($request)
+    {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        if (! Auth::attempt($credentials)) {
+
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
+    }
+
 
     /**
      * Display the specified resource.

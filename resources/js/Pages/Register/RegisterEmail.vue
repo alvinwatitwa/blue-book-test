@@ -14,7 +14,6 @@
     });
 
     function register() {
-        console.log(user);
         const form = useForm({
             name: user.value.name,
             email: user.value.email,

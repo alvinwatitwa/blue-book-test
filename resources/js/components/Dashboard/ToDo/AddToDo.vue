@@ -10,7 +10,9 @@ const value = ref("<p>The Rich text.</p>");
 const richtexteditor =  [Toolbar, Link, Image, HtmlEditor];
 provide('richtexteditor', richtexteditor);
     const props = defineProps({
-        isVisible: Boolean
+        isVisible: Boolean,
+        statuses: Array,
+        priorities: Array,
     })
     const emit = defineEmits(['close'])
 
@@ -66,9 +68,7 @@ provide('richtexteditor', richtexteditor);
           <div class="flex justify-between gap-2 px-4 py-3 mt-1 bg-white border border-gray-300 border-solid rounded-md">
             <select id="status" class="w-full bg-transparent focus:outline-none" v-model="todo.status_id">
               <option value="" disabled selected>Select status</option>
-              <option value="9c26bd26-61dd-457a-9b00-8e737aebce70">Open</option>
-              <option value="9c26bd26-6629-4f44-b4fe-cce56ce74e86">In Progress</option>
-              <option value="9c26bd26-61dd-457a-9b00-8e737aebce70">Completed</option>
+              <option v-for="status in statuses" :key="status.id" :value="status.id">{{status.name}}</option>
             </select>
           </div>
         </div>
@@ -78,10 +78,7 @@ provide('richtexteditor', richtexteditor);
           <div class="flex justify-between gap-2 px-4 py-3 mt-1 bg-white border border-gray-300 border-solid rounded-md">
             <select id="priority" class="w-full bg-transparent focus:outline-none" v-model="todo.priority_id">
               <option value="" disabled selected>Select priority</option>
-              <option value="9c26bd26-67da-44c2-94c2-04e4236aee47">Highest</option>
-              <option value="9c26bd26-6829-4835-95a6-d76a0efde9e5">High</option>
-              <option value="9c26bd26-6869-4263-9d44-3fb883625005">Medium</option>
-              <option value="9c26bd26-68a6-4956-9de7-97b2495200bc">Low</option>
+              <option v-for="priority in priorities" :key="priority.id" :value="priority.id">{{priority.name}}</option>
             </select>
           </div>
         </div>

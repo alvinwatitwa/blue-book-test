@@ -7,7 +7,10 @@
     ariaTitle: { type: String, required: true },
     todos: { type: Array, required: true },
   });
+
   const showPanel = ref(false);
+  const isSlided = ref(false);
+
   const togglePanel = (event) => {
     showPanel.value = !showPanel.value;
   }
@@ -19,7 +22,7 @@
         :arial-controls="'accordion-content-' + ariaTitle"
         :id="'accordion-control-' + ariaTitle"
         @click.prevent="togglePanel"
-        class="flex flex-row items-center justify-between w-full p-4 font-semibold border-b-2">
+        class="flex flex-row items-center justify-between w-full p-4 text-xl font-medium text-gray-900 border-b-2 whitespace-nowrap">
         {{ title }}
         <span
           class="material-icons"
